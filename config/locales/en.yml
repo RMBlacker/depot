@@ -68,3 +68,4 @@ en:
         pay_type: "pay_type"
         
   thanks:       "Thank you for your order"
+  missing_password: "Missing password"
