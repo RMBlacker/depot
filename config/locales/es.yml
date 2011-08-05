@@ -62,3 +62,4 @@ es:
         name:     "Nombre"
         email:    "E-mail"
         pay_type: "Forma de page"
+ missing_password: "Le Falta sin Contrasena"
