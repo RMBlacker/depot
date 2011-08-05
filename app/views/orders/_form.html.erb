@@ -1,0 +1,61 @@
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+<!--       <h2>%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2> -->
+      <%= t('errors.template.header',:count => @order.errors.size,:model => t('activerecord.models.order'))%>:
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= raw msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% @id = session[:user_id] 
+	   @user = User.find(@id) if @id != nil %>
+  <div >
+    <%= f.label :name, t('.name') %>
+    <%= f.text_field :name, :size=>40 ,:value => "#{@user.realname}"%>
+  </div>
+  <div >
+    <%= f.label :address, t('.address').html_safe %>
+    <%= f.text_area :address, :rows =>3,:col =>40,:value => "#{@user.address}" %>
+  </div>
+  <div >
+    <%= f.label :email, t('.email') %>
+    <%= f.text_field :email, :size=>40,:value => "#{@user.email}" %>
+  </div>
+  <div >
+    <%= f.label :email, t('.phone') %>
+    <%= f.text_field :email, :size=>40,:value => "#{@user.phone}" %>
+  </div>
+  <div >
+    <%= f.label :pay_type,t('.pay_type') %>
+    <%= f.select :pay_type,
+    					Order::PAYMENT_TYPES,
+    					:prompt => t('.pay_prompt').html_safe %>
+  </div>
+    <%= f.submit t('.submit')%>
+
+<!--  初始版
+  <div class="field">
+    %= f.label :name %><br />
+    %= f.text_field :name %>
+  </div>
+  <div class="field">
+    %= f.label :address %><br />
+    %= f.text_area :address %>
+  </div>
+  <div class="field">
+    %= f.label :email %><br />
+    %= f.text_field :email %>
+  </div>
+  <div class="field">
+    %= f.label :pay_type %><br />
+    <%= f.text_field :pay_type %>
+  </iv>
+  <div class="actions">
+    %= f.submit %>
+  </div>
+-->
+<% end %>

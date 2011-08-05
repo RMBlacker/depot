@@ -1,0 +1,49 @@
+<% if line_item == @current_item %>
+	<tr id="current_item">
+<% else %>
+	<tr>		
+<% end %>
+			<td>
+				<table>
+					<tr>
+						<td rowspan="2">
+							<%= line_item.quantity %>
+						</td>
+						<td rowspan="2" width="3">
+						</td>
+						<td width="11" height="8" border=0>
+							<%= link_to image_tag("btn_up.gif"),
+										{:controller => "line_items", 
+											:action => "increase_quantity",
+											:id => line_item},
+										{:remote => true} %>
+						</td>
+					</tr>
+					<tr>
+						<td width="11" height="8" border=0>
+							<%= link_to image_tag("btn_down.gif"),
+										{:controller => "line_items",
+											:action => "decrease_quantity",
+											:id => line_item},
+										{:remote => true} %>
+						</td>
+					</tr>
+				
+				</table>
+			</td>
+			<td><%= link_to line_item.product.title,line_item_path(:id => line_item),:method => :delete, :confirm =>"Sure to delete this?",:remote => true %></td>
+			<td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
+	</tr>
+<tr id="mydiv">
+	<%= form_for :line_item, :action =>line_item, :method => :put,:remote => true do |form|%>
+		<td>
+			<%= form.text_field :quantity, :size =>1%>
+		</td>
+		
+		<td>
+			<%= form.submit "OK"%>
+		</td>
+		<td></td>
+	<% end %>
+</tr>
+

@@ -1,0 +1,62 @@
+<div class="depot_form">
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<fieldset>
+	<legend>Enter User Details</legend>
+  <div >
+    <%= f.label :name ,'UserName'%>
+    <%= f.text_field :name, :size =>40 %>
+  </div>
+  <div>
+    <%= f.label :password, 'Password' %>
+    <%= f.password_field :password, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation, 'Confirm' %>
+    <%= f.password_field :password_confirmation, :size => 40 %>
+  </div>
+  <h5>
+   Optional:
+  </h5>
+  
+  <div>
+    <%= f.label :realname, 'RealName' %>
+    <%= f.text_field :realname, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :email, 'Email' %>
+    <%= f.text_field :email, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :address, 'Address' %>
+    <%= f.text_field :address, :size => 40 %>
+  </div>
+  <div>
+    <%= f.label :phone, 'Phone' %>
+    <%= f.text_field :phone, :size => 40 %>
+  </div>
+  
+  <% @id = session[:user_id] 
+	   @user = User.find(@id) if @id != nil %>
+  <% if @user.authority == true%>  
+  
+  <%= f.radio_button :authority,false%>Create As User <br />
+  <%= f.radio_button :authority,true%>Create As Administrator
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+ </fieldset>
+<% end %>
+</div>

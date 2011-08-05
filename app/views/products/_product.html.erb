@@ -1,0 +1,57 @@
+<div class="entry" id="product<%= product.id%>">
+		<%= image_tag(product.image_url) %>
+		<h3><%= product.title %>----------->score:<%= product.score %>----<%= product.score_number %> rated</h3>
+		<%=sanitize product.description %>
+		
+		
+	<div class="shop-rating">
+		<ul class="rating-level" id="stars1">
+			<li><%= link_to "1",{:controller => "products",:action => "change_score",:id => product,:score => 1},{:class => "one-star",:remote=>true}%></li>		
+			<li><%= link_to "2",{:controller => "products",:action => "change_score",:id => product,:score => 2},{:class => "two-stars",:remote=>true}%></li>
+			<li><%= link_to "3",{:controller => "products",:action => "change_score",:id => product,:score => 3},{:class => "three-stars",:remote=>true}%></li>
+			<li><%= link_to "4",{:controller => "products",:action => "change_score",:id => product,:score => 4},{:class => "four-stars",:remote=>true}%></li>
+			<li><%= link_to "5",{:controller => "products",:action => "change_score",:id => product,:score => 5},{:class => "five-stars",:remote=>true}%></li>
+		</ul>
+		<span class="result" id="stars1-tips"></span>
+	    <input type="hidden" id="stars1-input" name="b" value="" size="2" />
+	</div>
+		
+		
+		
+		<div class="price_line">
+			<span class="price"><%= number_to_currency(product.price) %></span>
+			<%= button_to "Add to Cart",line_items_path(:product_id => product),:remote => true %>
+			<%= button_to "Comments",{:controller => "comments",
+									:action => "show_comments",
+									:product_id => product},
+									{:remote => true}%>
+		</div>
+	<% if @comment_flag %>
+	<div class="comments" id="comments_div">
+		<%= form_for :new_comment, :url => {:controller => "comments",
+											:action => "create",
+											:product_id => product},
+											:remote => true do |f|%>
+			<div class="field">
+			    <%= f.text_area :content, :rows=>3 %>
+  			</div>
+  			<div class="actions">
+    			<%= f.submit 'Save'%>
+			</div>
+  		<% end %>
+		<% @comments.each do |comment| %>
+			<div class="comments_each">
+				<%=sanitize comment.content %>
+			</div>
+		<% end %>
+		<%= link_to "Hide This",{:controller => "comments",
+									:action => "hide_comments",
+									:product_id => product},
+									{:remote => true}%>	
+		<%= link_to "Check More",{:controller => "products",
+									:action => "show",
+									:id => product} %>
+	</div>
+	<% end %>
+	
+</div>

@@ -1,0 +1,21 @@
+<table>
+	<td valign="top">
+		<% if notice %>
+		<p id = "notice"><%= notice %></p>
+		<% end %>
+		<h1><%= t('.title_html') %></h1>
+		<% @products.each do |product| %>
+			<%= render(product) %>
+		<% end %>
+		<p><%= will_paginate @products %></p>
+	</td>
+	
+	<td id="hot" valign="top">
+		<div class="hot_three">
+			<h4>
+				Hot Three!!
+			</h4>
+			<%= render(:partial => "hot_three",:object =>@hot_three)%>
+		</div>>
+	</td>
+</table>

@@ -1,0 +1,12 @@
+
+<ul class="rolinList" id="rolin">
+	<% @hot_three.each do |product| %>
+		<li>
+			<h4><%= product.title%>-><%= product.score %></h4>
+			<div class="content">
+				<%= image_tag(product.image_url) %>
+				<span class="price"><%= number_to_currency(product.price) %></span>
+			</div>
+		</li>
+	<% end %>
+</ul>
