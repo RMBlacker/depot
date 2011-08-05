@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   private
   
     def password_must_be_present
-      errors.add(:password,"Missing password") unless hashed_password.present?
+      errors.add(:password,I18n.t(".missing_password")) unless hashed_password.present?
     end
 
     
