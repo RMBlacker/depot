@@ -7,6 +7,7 @@ en:
       messages:
         inclusion:  "is not include in the list"
         blank:      "can't be blank"     
+        password: "xxxx"
   errors:
     template:
       body:     "There are problems with the following fields:"
